@@ -2,14 +2,14 @@ class User {
   private id: string;
   private nickname: string;
   private email: string;
-  private password: string;
+  private token: string;
   private isAuthenticated: boolean;
 
-  constructor(id: string, nickname: string, email: string, password: string, isAuthenticated: boolean) {
+  constructor(id: string, nickname: string, email: string, token: string, isAuthenticated: boolean) {
     this.id = id;
     this.nickname = nickname;
     this.email = email;
-    this.password = password;
+    this.token = token;
     this.isAuthenticated = isAuthenticated;
   }
 
@@ -25,8 +25,8 @@ class User {
     return this.email;
   }
 
-  getPassword(): string {
-    return this.password;
+  getToken(): string {
+    return this.token;
   }
 
   getIsAuthenticated(): boolean {
