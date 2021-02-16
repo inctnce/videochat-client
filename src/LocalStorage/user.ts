@@ -8,7 +8,13 @@ function set(user: User): void {
 }
 
 function get(): User {
-  return JSON.parse(localStorage.getItem(key)!);
+  const user = localStorage.getItem(key);
+
+  if (user != null) {
+    return JSON.parse(user);
+  }
+
+  return new User("", "", "", "", false);
 }
 
 function remove(): void {
