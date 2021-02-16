@@ -3,7 +3,6 @@ import createStyles from "@material-ui/core/styles/createStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useGlobal = makeStyles((theme: Theme) => {
-  console.log(theme);
   return createStyles({
     root: {
       backgroundColor: theme.palette.background.default,
