@@ -11,13 +11,13 @@ import theme from "./theme";
 import { Provider } from "react-redux";
 import store from "./store";
 
-import App from "./components/App";
+import App from "./components/App/container";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <ThemeProvider theme={theme.getCurrentTheme()}>
-        <Provider store={store.getStore()}>
+        <Provider store={store}>
           <App />
         </Provider>
       </ThemeProvider>
