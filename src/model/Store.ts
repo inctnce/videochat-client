@@ -1,15 +1,15 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { AnyAction, applyMiddleware, CombinedState, createStore, Store as ReduxStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 
 class Store {
-  private store: any;
   private saga: any;
+  private store: ReduxStore<CombinedState<any>, AnyAction>;
 
-  constructor(reducers: any[]) {
+  constructor(reducers: any) {
     this.saga = createSagaMiddleware();
 
-    this.store = createStore(combineReducers(reducers), applyMiddleware(logger, this.saga));
+    this.store = createStore(reducers, applyMiddleware(logger, this.saga));
   }
 
   getStore(): any {
