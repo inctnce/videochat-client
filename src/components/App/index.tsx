@@ -4,8 +4,8 @@ import style from "./style.module.css";
 import useGlobal from "../../theme/global";
 import { Switch, Route } from "react-router-dom";
 import Login from "../Login";
-import Rooms from "../Home";
-import Notification from "../../model/Notification";
+import Rooms from "../Rooms/container";
+import Notification from "../../models/Notification";
 import Collapse from "@material-ui/core/Collapse";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
@@ -39,6 +39,7 @@ const App: React.FC<Props> = (props: Props) => {
         <Route path={PATH.REGISTRATION} component={() => <Registration />} />
         <Route path={PATH.ROOMS} component={() => <Rooms />} />
       </Switch>
+
       <div className={style.alert_wrapper}>
         <Collapse in={props.isNotification}>
           <Alert severity={props.notification.getSeverity()}>

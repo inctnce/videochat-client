@@ -1,5 +1,5 @@
-import Notification from "../../model/Notification";
-import App from "../../type/App";
+import Notification from "../../models/Notification";
+import App from "../../types/App";
 
 const app: App = {
   isNotification: false,

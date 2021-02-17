@@ -1,5 +1,5 @@
-import ILocalStorage from "../interface/LocalStorage";
-import User from "../model/User";
+import ILocalStorage from "../interfaces/LocalStorage";
+import User from "../models/User";
 
 const key: string = "user";
 

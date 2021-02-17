@@ -1,5 +1,5 @@
 import ACTION from "./ACTION";
-import Notification from "../../../model/Notification";
+import Notification from "../../../models/Notification";
 import { AnyAction } from "redux";
 
 function setNotification(notification: Notification): AnyAction {

@@ -1,4 +1,4 @@
-import Notification from "../model/Notification";
+import Notification from "../models/Notification";
 
 type App = {
   isNotification: boolean;

@@ -1,0 +1,15 @@
+.icon {
+  color: var(--icon-fill);
+  margin-left: var(--inset1);
+
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.search {
+  padding-left: var(--inset1);
+  font-size: 1em;
+}
+
+.wrapper {
+  border: 1px solid var(--level2);
+}

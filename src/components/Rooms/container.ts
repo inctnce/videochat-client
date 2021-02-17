@@ -1,20 +1,20 @@
 import { connect } from "react-redux";
 import { AnyAction, CombinedState } from "redux";
 import Component from ".";
-import app from "../../store/actions/app";
-import App from "../../types/App";
+import rooms from "../../store/actions/rooms";
 
-function mapStateToProps(state: CombinedState<{ app: App }>) {
+import Rooms from "../../types/Rooms";
+
+function mapStateToProps(state: CombinedState<{ rooms: Rooms }>) {
   return {
-    isNotification: state.app.isNotification,
-    notification: state.app.notification!,
+    filterValue: state.rooms.filterValue,
   };
 }
 
 function mapDispatchToProps(dispatch: (action: AnyAction) => void) {
   return {
-    cleanNotification: () => {
-      dispatch(app.cleanNotification());
+    updFilter: (value: string) => {
+      dispatch(rooms.updFilter(value));
     },
   };
 }
