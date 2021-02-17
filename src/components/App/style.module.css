@@ -5,3 +5,16 @@
 
   min-height: 100vh;
 }
+
+.alert_wrapper {
+  position: absolute;
+  bottom: var(--inset3);
+
+  z-index: 10;
+  width: 100vw;
+
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+}
