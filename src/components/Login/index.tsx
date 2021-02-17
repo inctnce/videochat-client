@@ -14,8 +14,6 @@ import style from "./style.module.css";
 import PATH from "../../PATH";
 
 const renderTextField: React.FC<any> = ({ ...props }) => {
-  console.log(props);
-
   return (
     <TextField
       name={props.input.name}
@@ -31,10 +29,14 @@ const renderTextField: React.FC<any> = ({ ...props }) => {
 const Login: React.FC = () => {
   const history = useHistory();
 
+  const onSubmit = (values: any) => {
+    alert(JSON.stringify(values));
+  };
+
   return (
     <Form
-      render={() => (
-        <Paper className={style.form}>
+      render={({ handleSubmit, invalid }) => (
+        <Paper className={style.form} component="form" onSubmit={handleSubmit}>
           <Typography className={style.header} align="center" variant="h5">
             Вход
           </Typography>
@@ -57,7 +59,14 @@ const Login: React.FC = () => {
           <Field className={style.item} name="email" type="email" label="Почта" component={renderTextField} />
           <Field className={style.item} name="password" type="password" label="Пароль" component={renderTextField} />
 
-          <Button className={style.item} disableElevation variant="contained" color="primary" onClick={() => {}}>
+          <Button
+            className={style.item}
+            disableElevation
+            disabled={invalid}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             Войти
           </Button>
 
@@ -74,7 +83,7 @@ const Login: React.FC = () => {
           </Button>
         </Paper>
       )}
-      onSubmit={() => {}}
+      onSubmit={onSubmit}
     />
   );
 };
