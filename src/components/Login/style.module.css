@@ -39,7 +39,7 @@
   height: 1px;
   width: 177px;
   margin-top: 10px;
-  background-color: var(--level4);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .divider_line:first-child {
@@ -51,7 +51,7 @@
 }
 
 .divider_text {
-  color: var(--level4);
+  color: rgba(0, 0, 0, 0.5);
   width: 30px;
   text-align: center;
 }
