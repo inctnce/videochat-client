@@ -8,7 +8,6 @@ import Rooms from "../../types/Rooms";
 function mapStateToProps(state: CombinedState<{ rooms: Rooms }>) {
   return {
     filterValue: state.rooms.filterValue,
-    rooms: state.rooms.rooms,
     filteredRooms: state.rooms.filteredRooms,
   };
 }

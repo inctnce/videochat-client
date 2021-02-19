@@ -19,7 +19,6 @@ type Props = {
   filterValue: string;
   updFilter: (filter: string) => void;
 
-  rooms: Room[];
   filteredRooms: Room[];
 
   addRoom: (name: string) => void;
@@ -28,7 +27,7 @@ type Props = {
 
 const Rooms: React.FC<Props> = (props: Props) => {
   React.useEffect(() => {
-    if (props.rooms.length === 0) {
+    if (props.filteredRooms.length === 0) {
       props.getRooms();
     }
   }, []);
@@ -61,7 +60,7 @@ const Rooms: React.FC<Props> = (props: Props) => {
     </ListItem>
   );
 
-  const ListItems = props.rooms.map((room: Room) => (
+  const ListItems = props.filteredRooms.map((room: Room) => (
     <ListItem
       key={room.getId()}
       button
