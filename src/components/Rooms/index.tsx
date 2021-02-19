@@ -8,9 +8,10 @@ import Paper from "@material-ui/core/Paper";
 import Add from "@material-ui/icons/Add";
 import React from "react";
 import { Field, Form } from "react-final-form";
+import { useHistory } from "react-router-dom";
 import Protected from "../../hocs/Protected";
 import Room from "../../models/Room";
-import User from "../../models/User";
+import PATH from "../../PATH";
 import Search from "../Reusable/Search";
 
 import style from "./style.module.css";
@@ -26,6 +27,8 @@ type Props = {
 };
 
 const Rooms: React.FC<Props> = (props: Props) => {
+  const history = useHistory();
+
   React.useEffect(() => {
     if (props.filteredRooms.length === 0) {
       props.getRooms();
@@ -65,7 +68,7 @@ const Rooms: React.FC<Props> = (props: Props) => {
       key={room.getId()}
       button
       onClick={() => {
-        alert(room.getId());
+        history.push(PATH.ROOMS + `/${room.getId()}`);
       }}
     >
       <ListItemText primary={room.getName()} secondary={room.getUsers().length + " пользователей"} />
