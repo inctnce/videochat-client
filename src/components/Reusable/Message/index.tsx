@@ -3,11 +3,11 @@ import style from "./style.module.css";
 
 import Message from "../../../models/Message";
 import Typography from "@material-ui/core/Typography";
-import UserLS from "../../../LocalStorage/user";
+import IdLS from "../../../LocalStorage/id";
 
 const ChatMessage: React.FC<Message> = (message: Message) => {
   const messageStyle: string =
-    UserLS.get() == message.getSender().getId() ? style.message + " " + style.me : style.message + " " + style.another;
+    IdLS.get() == message.getSender().getId() ? style.message + " " + style.me : style.message + " " + style.another;
 
   return (
     <div className={style.wrapper}>

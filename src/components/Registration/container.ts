@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import { AnyAction, CombinedState } from "redux";
 import Component from ".";
-import register from "../../store/actions/registration";
-import Login from "../../types/Login";
+import user from "../../store/actions/user";
+import User from "../../types/User";
 
-function mapStateToProps(state: CombinedState<{ login: Login }>) {
+function mapStateToProps(state: CombinedState<{ login: User }>) {
   return {
     isAuthenticated: state.login.isAuthenticated,
   };
@@ -13,7 +13,7 @@ function mapStateToProps(state: CombinedState<{ login: Login }>) {
 function mapDispatchToProps(dispatch: (action: AnyAction) => void) {
   return {
     register: (nickname: string, email: string, password: string) => {
-      dispatch(register(nickname, email, password));
+      dispatch(user.register(nickname, email, password));
     },
   };
 }

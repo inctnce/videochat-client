@@ -1,5 +1,9 @@
 enum ACTION {
   UPD_FILTER = "UPD_FILTER",
+  ADD_ROOM = "ADD_ROOM",
+  GET_ROOMS = "GET_ROOMS",
+  SET_ROOMS = "SET_ROOMS",
+  PUSH_ROOM = "PUSH_ROOM",
 }
 
 export default ACTION;

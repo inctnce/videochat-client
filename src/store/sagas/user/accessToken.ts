@@ -1,5 +1,5 @@
 import api from "..";
-import { call, put, takeEvery as takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import ACTION from "../../actions/user/ACTION";
 import app from "../../actions/app";
@@ -7,47 +7,34 @@ import login from "../../actions/user";
 import Notification from "../../../models/Notification";
 import RefreshTokenLS from "../../../LocalStorage/refreshToken";
 import AccessTokenLS from "../../../LocalStorage/accessToken";
-import IdLS from "../../../LocalStorage/id";
-import NicknameLS from "../../../LocalStorage/nickname";
 
-async function register(nickname: string, email: string, password: string): Promise<any> {
-  const data = {
-    nickname: nickname,
-    email: email,
-    password: password,
-  };
-
+async function updateAccessToken(id: string) {
   return await api
-    .post("/user/create", data)
+    .get(`/user/${id}/token`)
     .then((response) => {
-      if (response.status === 201) {
+      if (response.status === 200) {
         return response.data;
       }
     })
     .catch((err) => {
       console.log(err);
-      return { error: "пользователь уже существует" };
+      return { error: "неверная почта или пароль" };
     });
 }
 
 function* worker(action: AnyAction) {
-  const data = yield call(register, action.payload.nickname, action.payload.email, action.payload.password);
-
+  const data = yield call(updateAccessToken, action.payload.id);
   if (data.error) {
     const notification: Notification = new Notification(data.error, "Ошибка", "error");
     yield put(app.setNotification(notification));
   } else {
     RefreshTokenLS.set(data.refreshToken);
     AccessTokenLS.set(data.accessToken);
-    IdLS.set(data.user.id);
-    NicknameLS.set(data.user.nickname);
-
-    yield put(login.successfulLogin());
   }
 }
 
-function* watcher() {
-  yield takeLatest(ACTION.REGISTER, worker);
+function* watchUpdateToken() {
+  yield takeLatest(ACTION.UPDATE_TOKEN, worker);
 }
 
-export default watcher;
+export default watchUpdateToken;

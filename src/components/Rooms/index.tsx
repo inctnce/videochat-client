@@ -1,8 +1,13 @@
-import { Divider, ListItemText } from "@material-ui/core";
+import { ListItemText } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import InputBase from "@material-ui/core/InputBase";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Paper from "@material-ui/core/Paper";
+import Add from "@material-ui/icons/Add";
 import React from "react";
+import { Field, Form } from "react-final-form";
 import Protected from "../../hocs/Protected";
 import Room from "../../models/Room";
 import User from "../../models/User";
@@ -13,19 +18,50 @@ import style from "./style.module.css";
 type Props = {
   filterValue: string;
   updFilter: (filter: string) => void;
+
+  rooms: Room[];
+  filteredRooms: Room[];
+
+  addRoom: (name: string) => void;
+  getRooms: () => void;
 };
 
 const Rooms: React.FC<Props> = (props: Props) => {
-  const mockRooms: Room[] = [];
-  const mockUser: User = new User("", "", "", false);
-  mockRooms.push(new Room("1", "Комната 1", "1", [mockUser, mockUser, mockUser], []));
-  mockRooms.push(new Room("2", "Комната 2", "1", [mockUser, mockUser, mockUser, mockUser], []));
-  mockRooms.push(new Room("3", "Комната 3", "1", [mockUser, mockUser], []));
-  mockRooms.push(new Room("4", "Комната 4", "1", [mockUser, mockUser, mockUser, mockUser, mockUser], []));
+  React.useEffect(() => {
+    if (props.rooms.length === 0) {
+      props.getRooms();
+    }
+  }, []);
 
-  console.log(mockRooms);
+  const onSubmit = (values: any) => {
+    props.addRoom(values.roomName);
+  };
 
-  const ListItems = mockRooms.map((room: Room) => (
+  const AddRoomListItem: JSX.Element = (
+    <ListItem>
+      <Form
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              className={style.item}
+              name="roomName"
+              type="text"
+              placeholder="название комнаты"
+              component={renderInput}
+            />
+            <ListItemSecondaryAction>
+              <IconButton edge="end" type="submit">
+                <Add />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </form>
+        )}
+        onSubmit={onSubmit}
+      />
+    </ListItem>
+  );
+
+  const ListItems = props.rooms.map((room: Room) => (
     <ListItem
       key={room.getId()}
       button
@@ -33,17 +69,32 @@ const Rooms: React.FC<Props> = (props: Props) => {
         alert(room.getId());
       }}
     >
-      <ListItemText primary={room.getName()} secondary={room.getUsers().length} />
+      <ListItemText primary={room.getName()} secondary={room.getUsers().length + " пользователей"} />
     </ListItem>
   ));
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <Search className={style.search} value={props.filterValue} updFilter={props.updFilter} />
-      <Paper className={style.form}>
-        <List>{ListItems}</List>
+      <Paper variant="outlined" className={style.list}>
+        <List>
+          {AddRoomListItem}
+          {ListItems}
+        </List>
       </Paper>
     </div>
+  );
+};
+
+const renderInput: React.FC<any> = ({ ...props }) => {
+  return (
+    <InputBase
+      name={props.input.name}
+      value={props.input.value}
+      type={props.input.type}
+      onChange={props.input.onChange}
+      {...props}
+    />
   );
 };
 

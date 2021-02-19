@@ -19,7 +19,7 @@ const Room: React.FC = () => {
     mockMessages.push(new Message(i.toString(), "Some text " + Math.random().toString(), user));
   }
 
-  return <Paper className={style.chat}></Paper>;
+  return <Paper className={style.chat}>Room</Paper>;
 };
 
 export default Protected(Room);

@@ -11,6 +11,7 @@ import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import PATH from "../../PATH";
 import Registration from "../Registration/container";
+import Room from "../Room";
 
 type Props = {
   isNotification: boolean;
@@ -35,6 +36,7 @@ const App: React.FC<Props> = (props: Props) => {
   return (
     <div className={global.root + " " + style.wrapper}>
       <Switch>
+        <Route path={`${PATH.ROOMS}/:roomId`} component={() => <Room />} />
         <Route path={PATH.LOGIN} component={() => <Login />} />
         <Route path={PATH.REGISTRATION} component={() => <Registration />} />
         <Route path={PATH.ROOMS} component={() => <Rooms />} />

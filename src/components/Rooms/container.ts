@@ -8,6 +8,8 @@ import Rooms from "../../types/Rooms";
 function mapStateToProps(state: CombinedState<{ rooms: Rooms }>) {
   return {
     filterValue: state.rooms.filterValue,
+    rooms: state.rooms.rooms,
+    filteredRooms: state.rooms.filteredRooms,
   };
 }
 
@@ -15,6 +17,12 @@ function mapDispatchToProps(dispatch: (action: AnyAction) => void) {
   return {
     updFilter: (value: string) => {
       dispatch(rooms.updFilter(value));
+    },
+    addRoom: (name: string) => {
+      dispatch(rooms.addRoom(name));
+    },
+    getRooms: () => {
+      dispatch(rooms.getRooms());
     },
   };
 }

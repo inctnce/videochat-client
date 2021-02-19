@@ -1,12 +1,14 @@
-import api from ".";
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import api from "..";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import ACTION from "../../actions/login/ACTION";
+import ACTION from "../../actions/user/ACTION";
 import app from "../../actions/app";
-import login from "../../actions/login";
+import login from "../../actions/user";
 import Notification from "../../../models/Notification";
 import RefreshTokenLS from "../../../LocalStorage/refreshToken";
 import AccessTokenLS from "../../../LocalStorage/accessToken";
+import IdLS from "../../../LocalStorage/id";
+import NicknameLS from "../../../LocalStorage/nickname";
 
 async function log_in(email: string, password: string): Promise<any> {
   const data = {
@@ -36,6 +38,8 @@ function* workerLogin(action: AnyAction) {
   } else {
     RefreshTokenLS.set(data.refreshToken);
     AccessTokenLS.set(data.accessToken);
+    IdLS.set(data.user.id);
+    NicknameLS.set(data.user.nickname);
 
     yield put(login.successfulLogin());
   }

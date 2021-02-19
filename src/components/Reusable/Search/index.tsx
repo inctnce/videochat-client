@@ -42,7 +42,7 @@ const Search = (props: Props) => {
   const search_ref: React.RefObject<HTMLInputElement> = React.createRef();
 
   return (
-    <Paper component="div" className={props.className + " " + style.wrapper}>
+    <Paper variant="outlined" className={props.className + " " + style.wrapper}>
       <MyTextField
         inputRef={search_ref}
         className={style.shadow}
