@@ -12,25 +12,22 @@ import Google from "../../assets/icons/google";
 
 import style from "./style.module.css";
 import PATH from "../../PATH";
+import { Redirect } from "react-router-dom";
 
-const renderTextField: React.FC<any> = ({ ...props }) => {
-  return (
-    <TextField
-      name={props.input.name}
-      value={props.input.value}
-      type={props.input.type}
-      onChange={props.input.onChange}
-      {...props}
-      variant="outlined"
-    />
-  );
+type Props = {
+  isAuthenticated: boolean;
+  login(email: string, password: string): void;
 };
 
-const Login: React.FC = () => {
+const Login: React.FC<Props> = (props: Props) => {
   const history = useHistory();
 
+  if (props.isAuthenticated) {
+    return <Redirect to={PATH.ROOMS} />;
+  }
+
   const onSubmit = (values: any) => {
-    alert(JSON.stringify(values));
+    props.login(values.email, values.password);
   };
 
   return (
@@ -52,7 +49,9 @@ const Login: React.FC = () => {
 
           <div className={style.divider}>
             <span className={style.divider_line}></span>
-            <div className={style.divider_text}>или</div>
+            <Typography className={style.divider_text} variant="body2">
+              или
+            </Typography>
             <div className={style.divider_line}></div>
           </div>
 
@@ -84,6 +83,19 @@ const Login: React.FC = () => {
         </Paper>
       )}
       onSubmit={onSubmit}
+    />
+  );
+};
+
+const renderTextField: React.FC<any> = ({ ...props }) => {
+  return (
+    <TextField
+      name={props.input.name}
+      value={props.input.value}
+      type={props.input.type}
+      onChange={props.input.onChange}
+      {...props}
+      variant="outlined"
     />
   );
 };

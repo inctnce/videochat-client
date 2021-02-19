@@ -1,0 +1,15 @@
+.wrapper {
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+}
+
+.another {
+  margin-right: 20px;
+}
+
+.me {
+  margin-left: 20px;
+}

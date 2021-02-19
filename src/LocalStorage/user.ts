@@ -14,7 +14,7 @@ function get(): User {
     return JSON.parse(user);
   }
 
-  return new User("", "", "", "", false);
+  return new User("", "", "", false);
 }
 
 function remove(): void {

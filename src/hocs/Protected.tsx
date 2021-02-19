@@ -1,11 +1,11 @@
 import React from "react";
 import { Redirect } from "react-router";
-import UserLS from "../LocalStorage/user";
+import RefreshTokenLS from "../LocalStorage/refreshToken";
 import PATH from "../PATH";
 
 const Protected = (Component: any) => {
   const NewComponent = (props: any) => {
-    if (UserLS.get().isAuthenticated) {
+    if (RefreshTokenLS.get()) {
       return <Component {...props} />;
     }
     return <Redirect to={PATH.LOGIN} />;

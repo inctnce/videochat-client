@@ -1,4 +1,4 @@
-import Severity from "../types/severity";
+import Severity from "../types/Severity";
 
 class Notification {
   private title?: string;

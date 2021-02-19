@@ -4,6 +4,7 @@ import User from "./User";
 class Room {
   private id: string;
   private name: string;
+  private creator_id: string;
   private users: User[];
   private messages: Message[];
 
@@ -19,9 +20,10 @@ class Room {
     });
   }
 
-  constructor(id: string, name: string, users: User[], messages: Message[]) {
+  constructor(id: string, name: string, creator_id: string, users: User[], messages: Message[]) {
     this.id = id;
     this.name = name;
+    this.creator_id = creator_id;
     this.users = this.sortUsers(users);
     this.messages = this.sortMessages(messages);
   }
@@ -32,6 +34,10 @@ class Room {
 
   getName(): string {
     return this.name;
+  }
+
+  getCreatorId(): string {
+    return this.creator_id;
   }
 
   getUsers(): User[] {

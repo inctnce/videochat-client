@@ -3,7 +3,7 @@ import React from "react";
 import style from "./style.module.css";
 import useGlobal from "../../theme/global";
 import { Switch, Route } from "react-router-dom";
-import Login from "../Login";
+import Login from "../Login/container";
 import Rooms from "../Rooms/container";
 import Notification from "../../models/Notification";
 import Collapse from "@material-ui/core/Collapse";

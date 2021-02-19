@@ -12,11 +12,11 @@ function app(state: App = initialState, action: AnyAction): App {
       return {
         ...state,
         isNotification: true,
-        // notification: new Notification(
-        //   action.payload.getMessage(),
-        //   action.payload.getTitle(),
-        //   action.payload.getSeverity()
-        // ),
+        notification: new Notification(
+          action.payload.getMessage(),
+          action.payload.getTitle(),
+          action.payload.getSeverity()
+        ),
       };
     case ACTION.CLEAN_NOTIFICATION:
       return {

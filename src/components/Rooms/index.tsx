@@ -17,11 +17,11 @@ type Props = {
 
 const Rooms: React.FC<Props> = (props: Props) => {
   const mockRooms: Room[] = [];
-  const mockUser: User = new User("", "", "", "", false);
-  mockRooms.push(new Room("1", "Комната 1", [mockUser, mockUser, mockUser], []));
-  mockRooms.push(new Room("2", "Комната 2", [mockUser, mockUser, mockUser, mockUser], []));
-  mockRooms.push(new Room("3", "Комната 3", [mockUser, mockUser], []));
-  mockRooms.push(new Room("4", "Комната 4", [mockUser, mockUser, mockUser, mockUser, mockUser], []));
+  const mockUser: User = new User("", "", "", false);
+  mockRooms.push(new Room("1", "Комната 1", "1", [mockUser, mockUser, mockUser], []));
+  mockRooms.push(new Room("2", "Комната 2", "1", [mockUser, mockUser, mockUser, mockUser], []));
+  mockRooms.push(new Room("3", "Комната 3", "1", [mockUser, mockUser], []));
+  mockRooms.push(new Room("4", "Комната 4", "1", [mockUser, mockUser, mockUser, mockUser, mockUser], []));
 
   console.log(mockRooms);
 
@@ -47,4 +47,4 @@ const Rooms: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default Rooms;
+export default Protected(Rooms);

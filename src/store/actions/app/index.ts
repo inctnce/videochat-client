@@ -16,7 +16,7 @@ function cleanAlert(): AnyAction {
 }
 
 const app = {
-  setAlert: setNotification,
+  setNotification: setNotification,
   cleanNotification: cleanAlert,
 };
 

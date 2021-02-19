@@ -18,10 +18,6 @@
   margin: var(--inset1) !important;
 }
 
-.google_btn {
-  color: black !important;
-}
-
 .registration_btn {
   color: var(--primary) !important;
 }
@@ -39,7 +35,7 @@
   height: 1px;
   width: 177px;
   margin-top: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .divider_line:first-child {
@@ -51,7 +47,6 @@
 }
 
 .divider_text {
-  color: rgba(0, 0, 0, 0.5);
   width: 30px;
   text-align: center;
 }

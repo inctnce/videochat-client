@@ -1,0 +1,6 @@
+enum ACTION {
+  LOGIN = "LOGIN",
+  SUCCESSFUL_LOGIN = "SUCCESSFUL_LOGIN",
+}
+
+export default ACTION;
