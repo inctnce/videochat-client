@@ -12,6 +12,7 @@ import login from "./reducers/login";
 import rooms from "./reducers/rooms";
 
 import watchLogin from "./sagas/user/login";
+import watchRegister from "./sagas/user/register";
 
 const reducers = combineReducers({
   app: app,
@@ -27,5 +28,6 @@ const store: Store<CombinedState<{ app: App; login: Login; rooms: Rooms }>, AnyA
 );
 
 saga.run(watchLogin);
+saga.run(watchRegister);
 
 export default store;

@@ -1,34 +1,35 @@
 import api from ".";
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, put, takeEvery as takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
-import ACTION from "../../actions/login/ACTION";
+import ACTION from "../../actions/registration/ACTION";
 import app from "../../actions/app";
 import login from "../../actions/login";
 import Notification from "../../../models/Notification";
 import RefreshTokenLS from "../../../LocalStorage/refreshToken";
 import AccessTokenLS from "../../../LocalStorage/accessToken";
 
-async function log_in(email: string, password: string): Promise<any> {
+async function register(nickname: string, email: string, password: string): Promise<any> {
   const data = {
+    nickname: nickname,
     email: email,
     password: password,
   };
 
   return await api
-    .post("/user/login", data)
+    .post("/user/create", data)
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 201) {
         return response.data;
       }
     })
     .catch((err) => {
       console.log(err);
-      return { error: "неверная почта или пароль" };
+      return { error: "пользователь уже существует" };
     });
 }
 
-function* workerLogin(action: AnyAction) {
-  const data = yield call(log_in, action.payload.email, action.payload.password);
+function* worker(action: AnyAction) {
+  const data = yield call(register, action.payload.nickname, action.payload.email, action.payload.password);
 
   if (data.error) {
     const notification: Notification = new Notification(data.error, "Ошибка", "error");
@@ -41,8 +42,8 @@ function* workerLogin(action: AnyAction) {
   }
 }
 
-function* watchLogin() {
-  yield takeLatest(ACTION.LOGIN, workerLogin);
+function* watcher() {
+  yield takeLatest(ACTION.REGISTER, worker);
 }
 
-export default watchLogin;
+export default watcher;

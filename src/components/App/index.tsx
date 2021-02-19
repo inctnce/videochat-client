@@ -10,7 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import Alert from "@material-ui/lab/Alert";
 import AlertTitle from "@material-ui/lab/AlertTitle";
 import PATH from "../../PATH";
-import Registration from "../Registration";
+import Registration from "../Registration/container";
 
 type Props = {
   isNotification: boolean;
