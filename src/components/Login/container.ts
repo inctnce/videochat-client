@@ -2,9 +2,9 @@ import { connect } from "react-redux";
 import { AnyAction, CombinedState } from "redux";
 import Component from ".";
 import login from "../../store/actions/user";
-import User from "../../types/User";
+import Login from "../../types/Login";
 
-function mapStateToProps(state: CombinedState<{ login: User }>) {
+function mapStateToProps(state: CombinedState<{ login: Login }>) {
   return {
     isAuthenticated: state.login.isAuthenticated,
   };

@@ -2,7 +2,7 @@ import React from "react";
 
 import style from "./style.module.css";
 import useGlobal from "../../theme/global";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Login from "../Login/container";
 import Rooms from "../Rooms/container";
 import Notification from "../../models/Notification";
@@ -22,6 +22,7 @@ type Props = {
 
 const App: React.FC<Props> = (props: Props) => {
   const global = useGlobal();
+  const history = useHistory();
 
   React.useEffect(() => {
     if (props.isNotification) {
@@ -32,6 +33,8 @@ const App: React.FC<Props> = (props: Props) => {
       return () => clearTimeout(timeout);
     }
   }, [props, props.isNotification]);
+
+  history.push(PATH.ROOMS);
 
   return (
     <div className={global.root + " " + style.wrapper}>
@@ -44,9 +47,9 @@ const App: React.FC<Props> = (props: Props) => {
 
       <div className={style.alert_wrapper}>
         <Collapse in={props.isNotification}>
-          <Alert severity={props.notification.getSeverity()}>
-            {props.notification.getTitle() ? <AlertTitle>{props.notification.getTitle()}</AlertTitle> : <></>}
-            {props.notification.getMessage()}
+          <Alert severity={props.notification.Severity()}>
+            {props.notification.Title() ? <AlertTitle>{props.notification.Title()}</AlertTitle> : <></>}
+            {props.notification.Message()}
           </Alert>
         </Collapse>
       </div>

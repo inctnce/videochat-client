@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { AnyAction, CombinedState } from "redux";
 import Component from ".";
+import room from "../../store/actions/room";
 import rooms from "../../store/actions/rooms";
 
 import Rooms from "../../types/Rooms";
@@ -22,6 +23,9 @@ function mapDispatchToProps(dispatch: (action: AnyAction) => void) {
     },
     getRooms: () => {
       dispatch(rooms.getRooms());
+    },
+    setRoom: (id: string, name: string) => {
+      dispatch(room.goToTheRoom(id, name));
     },
   };
 }

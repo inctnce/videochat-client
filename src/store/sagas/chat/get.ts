@@ -4,44 +4,38 @@ import { AnyAction } from "redux";
 import ACTION from "../../actions/rooms/ACTION";
 import app from "../../actions/app";
 import Notification from "../../../models/Notification";
-import IdLS from "../../../LocalStorage/id";
 import rooms from "../../actions/rooms";
 import Room from "../../../models/Room";
 
-async function create(name: string, creatorId: string): Promise<any> {
-  const data = {
-    name: name,
-    creatorId: creatorId,
-  };
-
+async function get(): Promise<any> {
   return await api
-    .post("/room/create", data)
+    .get("/room/get")
     .then((response) => {
-      if (response.status === 201) {
+      if (response.status === 200) {
         return response.data;
       }
     })
     .catch((err) => {
       console.log(err);
-      return { error: "комната с таким именем уже существует" };
+      return { error: "не удалось получить комнаты" };
     });
 }
 
-function* worker(action: AnyAction) {
-  const data = yield call(create, action.payload, IdLS.get());
+function* worker(_action: AnyAction) {
+  const data = yield call(get);
 
   if (data.error) {
     const notification: Notification = new Notification(data.error, "Ошибка", "error");
     yield put(app.setNotification(notification));
   } else {
     console.log(data);
-    const room: Room = new Room(data.id, data.name, data.creatorId, [], []);
-    yield put(rooms.pushRoom(room));
+
+    // yield put(rooms.setRooms(roomsData));
   }
 }
 
-function* watchCreateRoom() {
-  yield takeLatest(ACTION.ADD_ROOM, worker);
+function* watchGetRooms() {
+  yield takeLatest(ACTION.GET_ROOMS, worker);
 }
 
-export default watchCreateRoom;
+export default watchGetRooms;

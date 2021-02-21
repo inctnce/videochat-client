@@ -4,7 +4,7 @@ import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 
 import App from "../types/App";
-import User from "../types/User";
+import Login from "../types/Login";
 import Rooms from "../types/Rooms";
 
 import app from "./reducers/app";
@@ -13,8 +13,8 @@ import rooms from "./reducers/rooms";
 
 import watchLogin from "./sagas/user/login";
 import watchRegister from "./sagas/user/register";
-import watchCreateRoom from "./sagas/room/create";
-import watchGetRooms from "./sagas/room/get";
+import watchCreateRoom from "./sagas/rooms/create";
+import watchGetRooms from "./sagas/rooms/get";
 import watchUpdateToken from "./sagas/user/accessToken";
 
 const reducers = combineReducers({
@@ -25,7 +25,7 @@ const reducers = combineReducers({
 
 const saga = createSagaMiddleware();
 
-const store: Store<CombinedState<{ app: App; login: User; rooms: Rooms }>, AnyAction> = createStore(
+const store: Store<CombinedState<{ app: App; login: Login; rooms: Rooms }>, AnyAction> = createStore(
   reducers,
   applyMiddleware(logger, saga)
 );

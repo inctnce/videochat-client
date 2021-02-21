@@ -5,10 +5,8 @@ import ACTION from "../../actions/user/ACTION";
 import app from "../../actions/app";
 import login from "../../actions/user";
 import Notification from "../../../models/Notification";
-import RefreshTokenLS from "../../../LocalStorage/refreshToken";
-import AccessTokenLS from "../../../LocalStorage/accessToken";
-import IdLS from "../../../LocalStorage/id";
-import NicknameLS from "../../../LocalStorage/nickname";
+import userLS from "../../../LocalStorage/user";
+import User from "../../../models/User";
 
 async function register(nickname: string, email: string, password: string): Promise<any> {
   const data = {
@@ -37,10 +35,16 @@ function* worker(action: AnyAction) {
     const notification: Notification = new Notification(data.error, "Ошибка", "error");
     yield put(app.setNotification(notification));
   } else {
-    RefreshTokenLS.set(data.refreshToken);
-    AccessTokenLS.set(data.accessToken);
-    IdLS.set(data.user.id);
-    NicknameLS.set(data.user.nickname);
+    const user: User = new User(
+      data.id,
+      data.creationDate,
+      data.nickname,
+      data.email,
+      data.hashedPassword,
+      data.refreshToken,
+      data.accessToken
+    );
+    userLS.set(user);
 
     yield put(login.successfulLogin());
   }

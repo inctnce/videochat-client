@@ -1,9 +1,11 @@
-import RefreshTokenLS from "../../LocalStorage/refreshToken";
-import User from "../../types/User";
+import userLS from "../../LocalStorage/user";
+import User from "../../models/User";
+import Login from "../../types/Login";
 
-const isAuthenticated: boolean = !!RefreshTokenLS.get();
+const u: User = userLS.get()!;
+const isAuthenticated: boolean = u ? !!u.RefreshToken() : false;
 
-const login: User = {
+const login: Login = {
   isAuthenticated: isAuthenticated,
 };
 

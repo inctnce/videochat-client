@@ -13,15 +13,34 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-:root {
-  --icon-fill: rgba(0, 0, 0, 0.6);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --icon-fill: rgba(255, 255, 255, 0.5);
+    --input-border: rgba(255, 255, 255, 0.2);
 
-  --inset0: 4px;
-  --inset1: 8px;
-  --inset2: 16px;
-  --inset3: 24px;
-  --inset4: 32px;
-  --inset5: 56px;
-  --inset6: 64px;
-  --inset7: 128px;
+    --inset0: 4px;
+    --inset1: 8px;
+    --inset2: 16px;
+    --inset3: 24px;
+    --inset4: 32px;
+    --inset5: 56px;
+    --inset6: 64px;
+    --inset7: 128px;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --icon-fill: rgba(0, 0, 0, 0.5);
+    --input-border: rgba(0, 0, 0, 0.2);
+
+    --inset0: 4px;
+    --inset1: 8px;
+    --inset2: 16px;
+    --inset3: 24px;
+    --inset4: 32px;
+    --inset5: 56px;
+    --inset6: 64px;
+    --inset7: 128px;
+  }
 }

@@ -1,9 +1,9 @@
 import { AnyAction } from "redux";
-import User from "../../types/User";
+import Login from "../../types/Login";
 import ACTION from "../actions/user/ACTION";
 import initialState from "../states/user";
 
-function app(state: User = initialState, action: AnyAction): User {
+function app(state: Login = initialState, action: AnyAction): Login {
   switch (action.type) {
     case ACTION.SUCCESSFUL_LOGIN:
       return {

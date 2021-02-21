@@ -1,43 +1,47 @@
-import User from "./User";
+import Model from "./Model";
 
-class Message {
-  private id: string;
+class Message extends Model {
   private text: string;
-  private creator: User;
-  private creationDate: Date;
   private isChanged: boolean;
+  private creatorId: string;
+  private creatorNickname: string;
+  private roomId: string;
 
-  constructor(id: string, text: string, sender: User) {
-    this.id = id;
+  constructor(
+    id: string,
+    creationDate: Date,
+    text: string,
+    creatorId: string,
+    creatorNickname: string,
+    roomId: string,
+    isEdited?: boolean
+  ) {
+    super(id, creationDate);
     this.text = text;
-    this.creator = sender;
-    this.creationDate = new Date();
-    this.isChanged = false;
+    this.isChanged = !!isEdited;
+    this.creatorId = creatorId;
+    this.creatorNickname = creatorNickname;
+    this.roomId = roomId;
   }
 
-  getId(): string {
-    return this.id;
-  }
-
-  getText(): string {
+  Text(): string {
     return this.text;
   }
 
-  getSender(): User {
-    return this.creator;
-  }
-
-  getCreationDate(): Date {
-    return this.creationDate;
-  }
-
-  getIsChanged(): boolean {
+  IsEdited(): boolean {
     return this.isChanged;
   }
 
-  changeText(text: string): void {
-    this.text = text;
-    this.isChanged = true;
+  CreatorId(): string {
+    return this.creatorId;
+  }
+
+  CreatorNickname(): string {
+    return this.creatorNickname;
+  }
+
+  RoomId(): string {
+    return this.roomId;
   }
 }
 

@@ -9,7 +9,7 @@ function filterSearch(items: Room[], filterStr: string): any {
   const filteredItems = [];
 
   for (let i = 0; i < items.length; i++) {
-    const name: string = items[i].getName();
+    const name: string = items[i].Name();
 
     if (name.toLowerCase().search(filterStr.toLowerCase().trim()) !== -1) {
       filteredItems.push(items[i]);
@@ -46,6 +46,7 @@ function rooms(state: Rooms = initialState, action: AnyAction): Rooms {
       return {
         ...state,
         rooms: [...r],
+        filteredRooms: [...r],
       };
   }
   return state;

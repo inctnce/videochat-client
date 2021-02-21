@@ -3,10 +3,9 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { AnyAction } from "redux";
 import ACTION from "../../actions/user/ACTION";
 import app from "../../actions/app";
-import login from "../../actions/user";
 import Notification from "../../../models/Notification";
-import RefreshTokenLS from "../../../LocalStorage/refreshToken";
-import AccessTokenLS from "../../../LocalStorage/accessToken";
+import User from "../../../models/User";
+import userLS from "../../../LocalStorage/user";
 
 async function updateAccessToken(id: string) {
   return await api
@@ -28,8 +27,9 @@ function* worker(action: AnyAction) {
     const notification: Notification = new Notification(data.error, "Ошибка", "error");
     yield put(app.setNotification(notification));
   } else {
-    RefreshTokenLS.set(data.refreshToken);
-    AccessTokenLS.set(data.accessToken);
+    const user: User = userLS.get()!;
+    user.SetAccessToken(data.accessToken);
+    userLS.set(user);
   }
 }
 

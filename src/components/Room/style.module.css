@@ -2,4 +2,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin: var(--inset2) 0;
+
+  width: 600px;
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: row;
+
+  width: 600px;
+}
+
+.input {
+  flex-grow: 1;
+
+  margin: var(--inset1);
+  padding-left: var(--inset1) !important;
+
+  border: 1px solid var(--input-border);
+  border-radius: var(--inset0);
+}
+
+.sendBtn {
+  margin: var(--inset1) !important;
+}
+
+@media screen and (max-width: 600px) {
+  .chat {
+    width: 95vw;
+  }
+  .inputWrapper {
+    width: 95vw;
+  }
+  .input {
+    margin: 1.5vw;
+    width: 92vw;
+  }
 }

@@ -1,30 +1,51 @@
-class User {
-  private id: string;
+import Model from "./Model";
+
+class User extends Model {
   private nickname: string;
   private email: string;
-  private isAuthenticated: boolean;
+  private hashedPassword: string;
+  private refreshToken: string;
+  private accessToken: string;
 
-  constructor(id: string, nickname: string, email: string, isAuthenticated: boolean) {
-    this.id = id;
+  constructor(
+    id: string,
+    creationDate: Date,
+    nickname: string,
+    email: string,
+    hashedPassword: string,
+    refreshToken: string,
+    accessToken: string
+  ) {
+    super(id, creationDate);
     this.nickname = nickname;
     this.email = email;
-    this.isAuthenticated = isAuthenticated;
+    this.hashedPassword = hashedPassword;
+    this.refreshToken = refreshToken;
+    this.accessToken = accessToken;
   }
 
-  getId(): string {
-    return this.id;
-  }
-
-  getNickname(): string {
+  Nickname(): string {
     return this.nickname;
   }
 
-  getEmail(): string {
+  Email(): string {
     return this.email;
   }
 
-  getIsAuthenticated(): boolean {
-    return this.isAuthenticated;
+  HashedPassword(): string {
+    return this.hashedPassword;
+  }
+
+  RefreshToken(): string {
+    return this.refreshToken;
+  }
+
+  AccessToken(): string {
+    return this.accessToken;
+  }
+
+  SetAccessToken(token: string) {
+    this.accessToken = token;
   }
 }
 

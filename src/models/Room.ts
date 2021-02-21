@@ -1,78 +1,41 @@
+import Model from "./Model";
 import Message from "./Message";
-import User from "./User";
 
-class Room {
-  private id: string;
+class Room extends Model {
   private name: string;
-  private creator_id: string;
-  private users: User[];
   private messages: Message[];
+  private numOfUsers: number;
+  private creatorId: string;
 
-  private sortUsers(users: User[]): User[] {
-    return users.sort((a: User, b: User) => {
-      return a.getNickname().toLowerCase() < b.getNickname().toLowerCase() ? -1 : 1;
-    });
-  }
-
-  private sortMessages(messages: Message[]): Message[] {
-    return messages.sort((a: Message, b: Message) => {
-      return a.getCreationDate() < b.getCreationDate() ? -1 : 1;
-    });
-  }
-
-  constructor(id: string, name: string, creator_id: string, users: User[], messages: Message[]) {
-    this.id = id;
+  constructor(
+    id: string,
+    creationDate: Date,
+    name: string,
+    messages: Message[],
+    numOfUsers: number,
+    creatorId: string
+  ) {
+    super(id, creationDate);
     this.name = name;
-    this.creator_id = creator_id;
-    this.users = this.sortUsers(users);
-    this.messages = this.sortMessages(messages);
+    this.messages = messages;
+    this.numOfUsers = numOfUsers;
+    this.creatorId = creatorId;
   }
 
-  getId(): string {
-    return this.id;
-  }
-
-  getName(): string {
+  Name(): string {
     return this.name;
   }
 
-  getCreatorId(): string {
-    return this.creator_id;
-  }
-
-  getUsers(): User[] {
-    return this.users;
-  }
-
-  getMessages(): Message[] {
+  Messages(): Message[] {
     return this.messages;
   }
 
-  changeName(name: string): void {
-    this.name = name;
+  NumOfUsers(): number {
+    return this.numOfUsers;
   }
 
-  pushUser(user: User): void {
-    this.users.push(user);
-    this.sortUsers(this.users);
-  }
-
-  removeUser(user: User): void {
-    const index = this.users.indexOf(user);
-    if (index > -1) {
-      this.users.splice(index, 1);
-    }
-  }
-
-  pushMessage(message: Message): void {
-    this.messages.push(message);
-  }
-
-  removeMessage(message: Message): void {
-    const index = this.messages.indexOf(message);
-    if (index > -1) {
-      this.users.splice(index, 1);
-    }
+  CreatorId(): string {
+    return this.creatorId;
   }
 }
 

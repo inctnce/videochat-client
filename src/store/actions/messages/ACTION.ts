@@ -1,0 +1,6 @@
+enum ACTION {
+  GET_MESSAGES = "GET_MESSAGES",
+  SEND_MESSAGE = "SEND_MESSAGE",
+}
+
+export default ACTION;

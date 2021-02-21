@@ -33,7 +33,7 @@ function* worker(_action: AnyAction) {
     const roomsData: Room[] = [];
 
     data.forEach((room: any) => {
-      roomsData.push(new Room(room.id, room.name, room.creator_id, [], []));
+      roomsData.push(new Room(room.id, room.creationDate, room.name, room.messages, room.numOfUsers, room.creatorId));
     });
 
     yield put(rooms.setRooms(roomsData));

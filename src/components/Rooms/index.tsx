@@ -1,4 +1,5 @@
 import { ListItemText } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
 import List from "@material-ui/core/List";
@@ -23,6 +24,7 @@ type Props = {
   filteredRooms: Room[];
 
   addRoom: (name: string) => void;
+  setRoom: (name: string) => void;
   getRooms: () => void;
 };
 
@@ -53,7 +55,7 @@ const Rooms: React.FC<Props> = (props: Props) => {
             />
             <ListItemSecondaryAction>
               <IconButton edge="end" type="submit">
-                <Add />
+                <Add className={style.icon} />
               </IconButton>
             </ListItemSecondaryAction>
           </form>
@@ -65,13 +67,13 @@ const Rooms: React.FC<Props> = (props: Props) => {
 
   const ListItems = props.filteredRooms.map((room: Room) => (
     <ListItem
-      key={room.getId()}
+      key={room.Id()}
       button
       onClick={() => {
-        history.push(PATH.ROOMS + `/${room.getId()}`);
+        history.push(PATH.ROOMS + `/${room.Id()}`);
       }}
     >
-      <ListItemText primary={room.getName()} secondary={room.getUsers().length + " пользователей"} />
+      <ListItemText primary={room.Name()} secondary={room.NumOfUsers() + " пользователей"} />
     </ListItem>
   ));
 
@@ -81,6 +83,7 @@ const Rooms: React.FC<Props> = (props: Props) => {
       <Paper variant="outlined" className={style.list}>
         <List>
           {AddRoomListItem}
+          <Divider />
           {ListItems}
         </List>
       </Paper>

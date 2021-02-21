@@ -11,15 +11,15 @@ class Notification {
     this.severity = severity;
   }
 
-  getTitle(): string | undefined {
+  Title(): string | undefined {
     return this.title;
   }
 
-  getMessage(): string {
+  Message(): string {
     return this.message;
   }
 
-  getSeverity(): Severity {
+  Severity(): Severity {
     return this.severity;
   }
 }
